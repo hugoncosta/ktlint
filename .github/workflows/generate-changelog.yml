@@ -1,4 +1,6 @@
 name: Generate changelog
+permissions:
+  contents: read
 
 on: [ workflow_dispatch ]
 
@@ -7,16 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'pinterest/ktlint'
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           fetch-depth: 0 # fetch all commits/branches/tags
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: 24
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
 
       - name: Get last released version
         run: echo "version=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
